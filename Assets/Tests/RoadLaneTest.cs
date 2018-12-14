@@ -88,6 +88,8 @@ namespace Tests
         //or is something else more meaningful?
         //setting lane widths?
 
+        //one test for car: do not cross bike path! (in wrong place / vain, at least?) .. maybe useful to see lanes go sensible, or actually should just check the surface but.. eh?
+
 /*
         public bool IsTestFinished
         { 

@@ -11,13 +11,13 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
+  - name: Bike
     cost: 1
-  - name: 
+  - name: Car
     cost: 1
-  - name: 
+  - name: Walk
     cost: 1
-  - name: 
+  - name: Bus
     cost: 1
   - name: 
     cost: 1
