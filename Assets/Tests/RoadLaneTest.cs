@@ -23,7 +23,7 @@ namespace Tests
 
         public void LoadScene()
         {
-            SceneManager.LoadScene("SampleScene", LoadSceneMode.Additive);
+            SceneManager.LoadScene("RoadNetworkScene", LoadSceneMode.Additive);
         }
 
         // A Test behaves as an ordinary method
