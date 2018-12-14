@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 //using UnityEditor.SceneManagement; //for setup, apparently in editor mode for play mode test - except that didn't work
+using UnityEngine.AI;
 
 namespace Tests
 {
     public class RoadLaneTest //: IPrebuildSetup //: IMonoBehaviourTest
     {
-        public GameObject moveToActor;
+        //public GameObject moveToActor;
 
         public void Setup()
         {
@@ -19,11 +20,12 @@ namespace Tests
             //OpenScene("SampleScene");
             //UnityEditor.SceneManagement.LoadScene("SampleScene");
             //LoadScene(); //-- would not work: play mode call tells to use editor mode, which is not in assemblies
+            //NOTE: is possible to add editor assembly (assemblies?) to tests .. i think, reading the docs earlier
         }
 
         public void LoadScene()
         {
-            SceneManager.LoadScene("RoadNetworkScene", LoadSceneMode.Additive);
+            SceneManager.LoadScene("RoadNetworkScene", LoadSceneMode.Additive); //play mode unity engine call, called from a test
         }
 
         // A Test behaves as an ordinary method
@@ -43,6 +45,7 @@ namespace Tests
             //Debug.Log(moveToActor.active);
             //Debug.Log(actorGameObject.activeSelf);
             Assert.AreEqual(1, 1);
+            //cannot do anything here i guess cause all depends on the scene, even basic checks on road parts etc
         }
 
         GameObject GetActor()
@@ -74,6 +77,12 @@ namespace Tests
             Debug.Log($"{a} -> {t}");
 
             while (true) {
+                NavMeshAgent agent = a.GetComponent<NavMeshAgent>();
+                NavMeshPath path = agent.path;
+                Debug.Log(path);
+                Vector3[] corners = path.corners;
+                Debug.Log(corners);
+
                 float dist = Vector3.Distance(a.transform.position, t.transform.position);
                 Debug.Log(dist);
                 if (dist < 0.1f) { //with close position of the origins in y dir goes to 0.007901428 now - so this has plenty margin. 10cm is considered 'there' in this traffic nav
