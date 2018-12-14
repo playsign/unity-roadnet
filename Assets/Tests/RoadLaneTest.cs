@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class RoadLaneTest : IPrebuildSetup //: IMonoBehaviourTest
+    public class RoadLaneTest //: IPrebuildSetup //: IMonoBehaviourTest
     {
         public GameObject moveToActor;
 
@@ -33,13 +33,13 @@ namespace Tests
             LoadScene();
             // Use the Assert class to test conditions
 
-            var actorGameObject = GameObject.Find("Cylinder");
+            //var actorGameObject = GameObject.Find("Cylinder");
             //var setupButton = actorGameObject.GetComponent<MoveTo>();
 
             //Start journey
             //Assert.AreEqual(1, 0);
             //moveToActor.GetComponent<MoveTo>(); //Update();
-            Debug.Log(actorGameObject);
+            //Debug.Log(actorGameObject);
             //Debug.Log(moveToActor.active);
             //Debug.Log(actorGameObject.activeSelf);
             Assert.AreEqual(1, 1);
@@ -47,12 +47,12 @@ namespace Tests
 
         GameObject GetActor()
         {
-            return GameObject.Find("Cylinder");
+            return GameObject.Find("Biker");
         }
 
         GameObject GetTarget()
         {
-            return GameObject.Find("Sphere");
+            return GameObject.Find("BikeTarget");
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
@@ -83,6 +83,10 @@ namespace Tests
             }
             //yield return null;
         }
+
+        //next / complex test? .. lanes and intersection?
+        //or is something else more meaningful?
+        //setting lane widths?
 
 /*
         public bool IsTestFinished
