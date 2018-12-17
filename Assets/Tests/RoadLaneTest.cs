@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 //using UnityEditor.SceneManagement; //for setup, apparently in editor mode for play mode test - except that didn't work
 using UnityEngine.AI;
+//using Unity.VectorGraphics; //svg handling now on app side, not in test
 
 namespace Tests
 {
@@ -87,6 +88,8 @@ namespace Tests
             Debug.Log($"{b.name} : {b} -> {bt}");
             Debug.Log($"{c.name} : {c} -> {ct}");
 
+            //ApplySVGPath();
+
             while (true) {
                 if (AgentAtDestination(b, bt)
                  && AgentAtDestination(c, ct)) {
@@ -119,7 +122,27 @@ namespace Tests
         //one test for car: do not cross bike path! (in wrong place / vain, at least?) .. maybe useful to see lanes go sensible, or actually should just check the surface but.. eh?
 
         //or is something else more meaningful?
-        //setting lane widths?        
+        //setting lane widths?
+
+
+/* moved to the application side, with the idea that is used to show roads etc.
+also, triggered to make the move when encountered not having the extra vectorgraphics namespace in test assembly.
+which is maybe good
+    void ApplySVGPath()
+    {
+        string svgPath = "";
+        var sceneInfo = SVGParser.ImportSVG(new StreamReader(svgPath));
+        var path = sceneInfo.NodeIDs["e1_polyline"]; //.Shapes[0];
+        Debug.Log(path);
+        //var fill = shape.Fill as SolidFill;
+        //fill.Color = Color.red;
+
+        // ...
+        //var geoms = VectorUtils.TessellateScene(sceneInfo.Scene, tessOptions);
+        //var sprite = VectorUtils.BuildSprite(geoms, 100.0f, VectorUtils.Alignment.Center, Vector2.zero, 128, true); 
+    }
+*/
+
 
 /*
         public bool IsTestFinished
