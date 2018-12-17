@@ -88,20 +88,29 @@ namespace Tests
             Debug.Log($"{c.name} : {c} -> {ct}");
 
             while (true) {
-                NavMeshAgent agent = b.GetComponent<NavMeshAgent>();
-                NavMeshPath path = agent.path;
-                Debug.Log(path);
-                Vector3[] corners = path.corners;
-                Debug.Log(corners);
-
-                float dist = Vector3.Distance(b.transform.position, bt.transform.position);
-                Debug.Log(dist);
-                if (dist < 0.1f) { //with close position of the origins in y dir goes to 0.007901428 now - so this has plenty margin. 10cm is considered 'there' in this traffic nav
+                if (AgentAtDestination(b, bt)
+                 && AgentAtDestination(c, ct)) {
                     break;
                 }
                 yield return false;
             }
             //yield return null;
+        }
+
+        bool AgentAtDestination(GameObject a, GameObject t)
+        {
+            NavMeshAgent agent = a.GetComponent<NavMeshAgent>();
+            //NavMeshPath path = agent.path;
+            //Debug.Log(path);
+            //Vector3[] corners = path.corners;
+            //Debug.Log(corners);
+
+            float dist = Vector3.Distance(a.transform.position, t.transform.position);
+            Debug.Log(dist);
+            return (dist < 1f);
+            //with close position of the origins in y dir goes to 0.007901428 now - so this has plenty margin. 10cm is considered 'there' in this traffic nav
+            //now upped to 1 to use for coarse used-right-road-segment (some part of the lange, right way etc) route taking / wayfinding check
+            //also: does not affect driving behaviour, just acknowledges the waypoint in test - the actor still continues to go close to it, if it's the target
         }
 
         //next / complex test? .. lanes and intersection?
